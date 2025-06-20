@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% set encoding = 'utf-8' %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<style>
+    section {
+      margin-top: 3px;
+    }
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    </style>
+</head>
+<body>
+  <p><i style="font-size: 10px;">Последнее обновление - {{time}}</i></p>
+  <p>{{programSet}} {{compensationTypeShortTitle}}<p>
+  <p>Количество мест :{{plan}}<p>
+<button id="hide" class="btn btn-success">Показать рейтинг по оригиналам</button>
+<button id="reset" class="btn btn-info" >Полный рейтинг</button>
+<section>
+ <div>
+  <table class="table table-bordered table-striped" id="userTable" width="100%">
+    <thead>
+      <tr>
+        <th>№ п/п</th>
+        <th>№ в полном рейтинге</th>
+        <th style="text-transform: capitalize;">Фамилия Имя Отчество</th>
+        <th>Оригинал документа</th>
+        <th>Средний балл</th>
+        <th>Есть преимущественное право</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr data-orig="{{item.originalSubmissionWay}}">
+            <td ></td>
+           <td class="c1">{{item.rank}}</td>
+           <td class="c2">{{item.fullFio}}</td>
+           <td class="c3" ><SPAN>{{item.originalSubmissionWay}}</SPAN></td>
+           <td class="c4"><SPAN>{{item.averageEduInstitutionMark}}</SPAN></td>
+           <td class="c5"><SPAN>{{item.benefitSpecialCategory}}</SPAN></td>
+           
+        </tr>
+    
+    
+        {% endfor %}
+        <tbody>
+  </table>
+ </div>
+</section>
+
+<script>
+  $(document).ready(function() {
+    $('#userTable').DataTable();
+
+  });
+  var table = new DataTable('#userTable', {
+
+    scrollX: false,
+    scrollY: false,
+    language: {
+        url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
+    },
+    "aLengthMenu": [[ 25, 50, 100], [25, 50, 100]],
+    "iDisplayLength": 25,
+
+
+    columnDefs: [
+        {
+            searchable: false,
+            orderable: false,
+            targets: 0
+        }
+    ],
+    order: [[1, 'asc']]
+    
+});
+ 
+table
+    .on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table
+            .cells(null, 0, { search: 'applied', order: 'applied' })
+            .every(function (cell) {
+                this.data(i++);
+            });
+    })
+    .draw();
+var table = $('#userTable').DataTable();
+    $("#hide").click(function() {
+    $(this).attr('disabled', true); // Либо добавить атрибут disabled 
+    $("#reset").attr('disabled', false);
+    $.fn.dataTable.ext.search.push(
+      function(settings, data, dataIndex) {
+          return $(table.row(dataIndex).node()).attr('data-orig') == 'ДА';
+        }
+    );
+    table.draw();
+});    
+$("#reset").click(function() {
+    $(this).attr('disabled', true); // Либо добавить атрибут disabled 
+    $("#hide").attr('disabled', false);
+    $.fn.dataTable.ext.search.pop();
+    table.draw();
+});
+</script>
+</body>
+</html>

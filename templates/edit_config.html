@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактирование config.ini</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .section { margin-bottom: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px; }
+        .section h2 { margin-top: 0; color: #333; }
+        .form-group { margin-bottom: 10px; }
+        label { display: inline-block; width: 150px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        textarea { height: 150px; font-family: monospace; }
+        button { background: #4CAF50; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #45a049; }
+        .json-field {
+        font-family: monospace;
+        white-space: pre;
+        overflow-x: auto;}
+        textarea {
+        font-family: monospace;
+        white-space: nowrap;
+        overflow-x: auto;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Редактирование config.ini</h1>
+        <form method="post">
+            <!-- Секция tndm -->
+            <div class="section">
+                <h2>Настрйоки тандем</h2>
+                <div class="form-group">
+                    <label for="tndm_dirload">Куда сохранять файлы</label>
+                    <input type="text" id="tndm_dirload" name="tndm_dirload" value="{{ config['tndm']['dirload'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="tndm_url">Ссылка на тандем:</label>
+                    <input type="text" id="tndm_url" name="tndm_url" value="{{ config['tndm']['url'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="tndm_company">Номер приемной компании:</label>
+                    <input type="text" id="tndm_company" name="tndm_company" value="{{ config['tndm']['company'] }}">
+                </div>
+            </div>
+
+            <!-- Секция ftp -->
+            <div class="section">
+                <h2>Настройка ftp</h2>
+                <div class="form-group">
+                    <label for="ftp_hostname">hostname:</label>
+                    <input type="text" id="ftp_hostname" name="ftp_hostname" value="{{ config['ftp']['hostname'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="ftp_username">username:</label>
+                    <input type="text" id="ftp_username" name="ftp_username" value="{{ config['ftp']['username'] }}">
+                </div>
+                <div class="form-group">
+                    <label for="ftp_password">password:</label>
+                    <input type="text" id="ftp_password" name="ftp_password" value="{{ config['ftp']['password'] }}">
+                </div>
+            </div>
+
+            <!-- Секция time -->
+            <div class="section">
+                <h2>Интервал выгрузи</h2>
+                <div class="form-group">
+                    <label for="time_wakeup">минуты:</label>
+                    <input type="text" id="time_wakeup" name="time_wakeup" value="{{ config['time']['wakeup'] }}">
+                </div>
+            </div>
+
+            <!-- Секция login -->
+           <div class="form-group">
+                <label for="login_headers">headers:</label>
+                <textarea id="login_headers" name="login_headers" rows="8">{{ config['login']['headers'] | clean_json }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="login_params">payload:</label>
+                <textarea id="login_params" name="login_params" rows="15">{{ config['login']['params'] | clean_json }}</textarea>
+            </div>
+            </div>
+            
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </div>
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Очищаем JSON при отправке формы
+        document.querySelector('form').addEventListener('submit', function() {
+            const jsonFields = document.querySelectorAll('textarea.json-field');
+            jsonFields.forEach(field => {
+                field.value = field.value.replace(/\s+/g, ' ').trim();
+            });
+        });
+    });
+    </script>
+</body>
+</html>

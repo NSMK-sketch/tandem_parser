@@ -1,0 +1,138 @@
+<html>
+<head>
+    <title>Рейтинг абитуриентов НСМК</title>
+    <style>
+        .container1 {
+            text-align: center;
+            width: 50%;
+            height: 50%;
+            margin: auto;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url('https://sun9-32.userapi.com/impg/Eu8PZpWzSchWR2znqSWBHZT0Yyl8ODxnAukPNQ/uQNhD1NMJYg.jpg?size=604x429&quality=95&sign=fbe2f39356d349819497bb46db1a1d2a&type=album');
+            }
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        #output { height: 500px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-bottom: 20px; background: #f9f9f9; white-space: pre-wrap; }
+        .button { 
+            background:rgb(0, 0, 0); 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            text-align: center; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px; 
+            margin: 4px 2px; 
+            cursor: pointer; 
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .button.edit { background:rgb(111, 0, 0); }
+        .button.stop { background:rgb(111, 0, 0); }
+        .button.start { background:rgb(113, 0, 0); }
+        .button:disabled {
+            background: #cccccc !important;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .button.running {
+            background: #ff9800;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="container1"></div>
+        <h1>Рейтинг абитуриентов НСМК</h1>
+        <button class="button edit" onclick="window.location.href='/edit_config'">Редактировать config.ini</button>
+        <button id="startBtn" class="button start " onclick="startApp()">Запустить</button>
+        <button id="stopBtn" class="button stop " onclick="stopApp()" disabled>Остановить</button>
+        <div id="output">{{ output_content|default('Здесь будет отображаться вывод...') }}</div>
+        <a href="/download_log/app.log">Скачать лог</a>
+        <a href="/download_log/success_page1.html">Скачать html 1</a>
+        <a href="/download_log/success_page2.html">Скачать html 2</a>
+        <a href="/download_log/success_page3.html">Скачать html 3</a>
+        <a href="/download_log/success_page4.html">Скачать html 4</a>
+    </div>
+    
+
+    <script>
+        let isUpdating = false;
+        let updateInterval;
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+
+        function updateButtonStates(isRunning) {
+            startBtn.disabled = isRunning;
+            stopBtn.disabled = !isRunning;
+            
+            if (isRunning) {
+                startBtn.classList.add('running');
+            } else {
+                startBtn.classList.remove('running');
+            }
+        }
+
+        function startApp() {
+            fetch('/start')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('output').textContent = data;
+                    updateButtonStates(true);
+                    if (!isUpdating) {
+                        startUpdating();
+                    }
+                });
+        }
+
+        function stopApp() {
+            fetch('/stop')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('output').textContent = data;
+                    updateButtonStates(false);
+                    stopUpdating();
+                });
+        }
+
+        function startUpdating() {
+            isUpdating = true;
+            updateInterval = setInterval(updateOutput, 1000);
+        }
+
+        function stopUpdating() {
+            isUpdating = false;
+            clearInterval(updateInterval);
+        }
+
+        function updateOutput() {
+            fetch('/get_output')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('output').textContent = data;
+                    // Проверяем состояние приложения при каждом обновлении
+                    fetch('/is_running')
+                        .then(response => response.json())
+                        .then(data => {
+                            updateButtonStates(data.is_running);
+                        });
+                });
+        }
+
+        // Проверяем состояние при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/is_running')
+                .then(response => response.json())
+                .then(data => {
+                    updateButtonStates(data.is_running);
+                    if (data.is_running && !isUpdating) {
+                        startUpdating();
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
