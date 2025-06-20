@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" [
+<!ENTITY nbsp '&#160;'>
+]>
+<ajax-response><response id="initializationscript" type="script"><script>
+//<![CDATA[
+try {
+dropUnusedWidgets();
+} catch(err)
+{ alert('initialization script error\n' + err); }
+//]]>
+</script><script>
+//<![CDATA[
+try {
+{$("div[id^='bcDialog'][id$='errorContainer']").css('display', 'none');
+if (displayRegionDialog) {displayRegionDialog();}
+if( displayErrorPanelAction ) {displayErrorPanelAction();}}
+{$("div[id^='bcDialog'][id$='infoContainer']").css('display', 'none');
+if (displayRegionDialog) {displayRegionDialog();}
+if( displayInfoPanelAction ) {displayInfoPanelAction();}}
+
+} catch(err)
+{ alert('initialization script error\n' + err); }
+//]]>
+</script><script>
+//<![CDATA[
+try {
+timerSubmit('form', 'mExclusiveModePanel', 20000, false, true);
+} catch(err)
+{ alert('initialization script error\n' + err); }
+//]]>
+</script><script>
+//<![CDATA[
+try {
+timerSubmit('form', 'mMaintenanceModePanel', 20000, false, true);
+} catch(err)
+{ alert('initialization script error\n' + err); }
+//]]>
+</script><script>
+//<![CDATA[
+try {
+hideChildDialog('bcDialog');
+} catch(err)
+{ alert('initialization script error\n' + err); }
+//]]>
+</script><script>
+//<![CDATA[
+try {
+createTooltipVar("mTooltip_img_info", "mTooltip_img");
+dojo.require("tapestry.form");
+window.location.href = "/app?parameter=S1750084764700&provider=savedRenderer&service=documentService";
+} catch(err)
+{ alert('initialization script error\n' + err); }
+//]]>
+</script></response><response id="initScript" type="element"></response><response id="desktopHeader" type="element"><div cid="237tas" id="desktopHeader"> <table xmlns="http://www.w3.org/1999/html" class="sh-bc-desktop-header-container" cid="237tat"> <tr cid="237tau"> <td cid="237tav"> <img id="dbImage" src="/app?parameter=Sslave&amp;provider=logo&amp;service=documentService" cid="237tb0" /> </td> <td cid="237tbb"> <div class="sh-bc-desktop-header-block" cid="di1ugg"> <img src="img/home.png" alt="Домашняя страница" cid="237tai"/> <a id="bcLink" href="/app?back=510973124215&amp;bc=e655d8d32432108b308c8f1dd521273c&amp;service=bcs&amp;site=510973124240" target="_top" class="btn-link" cid="hk0"> Домашняя страница </a> </div> </td> <td cid="237tb9"> <div id="helpButton" cid="237tag"> 
+<script>
+//<![CDATA[
+
+	
+        // доступна ли справка
+        function isHelpAvalibe()
+        {
+            var html = "";
+			jQuery(".sh-help-block").each(function() {
+				html += "<div>" + this.innerHTML + "</div>";
+			});
+			jQuery("#helpContainerContent").html(html);
+
+			return html.length > 0;
+        }
+
+        // отображается ли сейчас справка
+        function isHelpDisplayed()
+        {
+            return jQuery("#helpContainer").css("display") != "none";
+        }
+
+        // показать активную кнопку справки
+        function showHelpButton()
+        {
+            jQuery("#helpActivatorShow").css("display", "");
+            jQuery("#helpActivatorClose").css("display", "none");
+            jQuery("#helpActivatorDisable").css("display", "none");
+        }
+
+        // показать активную кнопку закрытия справки
+        function closeHelpButton()
+        {
+            jQuery("#helpActivatorShow").css("display", "none");
+            jQuery("#helpActivatorClose").css("display", "");
+            jQuery("#helpActivatorDisable").css("display", "none");
+        }
+
+        // показать не активную кнопку справки
+        function disableHelpButton()
+        {
+            jQuery("#helpActivatorDisable").css("display", "");
+            jQuery("#helpActivatorShow").css("display", "none");
+            jQuery("#helpActivatorClose").css("display", "none");
+            jQuery("#helpContainer").css("display", "none");
+        }
+
+		// обновляет содержимое html страницы
+		function help_invalidate() {
+
+            jQuery("#helpActivator").css("display", "none");
+
+			if (isHelpAvalibe())
+            {
+                if (isHelpDisplayed())
+                {
+                    closeHelpButton()
+                }
+                else
+                {
+                    showHelpButton()
+                }
+			}
+            else
+            {
+				disableHelpButton()
+			}
+		}
+
+		// TODO: заменить это на скрипт после любого обновления страницы (видимо, надо сравнивать сначала response-id)
+		// обновляет содержимое html страницы (по таймеру)
+		window.setInterval(help_invalidate, 1000);
+
+		// закрыть help
+		function help_deactivate() {
+			jQuery("#helpContainer").css("display", "none");
+
+            showHelpButton()
+
+            return false;
+		}
+
+		// показать help
+		function help_activate() {
+			if (jQuery("#helpContainerContent").html().length > 0) {
+				jQuery("#helpContainer").css("display", "");
+
+                closeHelpButton()
+			}
+			return false;
+		}
+	//-->
+	
+//]]>
+</script>
+ <div id="helpActivator" class="sh-help-activator" cid="di1ugg"> <img src="img/help_circle_disabled.png" alt="Справка" cid="237tai"/> <div class="btn-link-disabled" cid="di1ugp"> Справка по странице </div> </div> <div id="helpActivatorShow" class="sh-help-activator" style="display:none;" cid="di1ugk"> <img src="img/help_circle.png" alt="Справка" cid="di1ugn"/> <a class="btn-link" href="javascript:;" onclick="return help_activate();" cid="1hi7120"> Справка по странице </a> </div> <div id="helpActivatorClose" class="sh-help-activator" style="display:none;" cid="di1ugq"> <img src="img/help_circle_close.png" alt="Справка" cid="di1ugt"/> <a class="btn-link" href="javascript:;" onclick="return help_deactivate();" cid="di1ugv"> Закрыть справку </a> </div> <div id="helpActivatorDisable" class="sh-help-activator" style="display:none;" cid="di1uh0"> <img src="img/help_circle_disabled.png" alt="Справка" cid="di1uh3"/> <div class="btn-link-disabled" cid="1hi7121"> Справка по странице </div> </div> </div> </td>  <td style="width:100%;" cid="237tbu"/>  <td cid="237tbz"> <div class="sh-bc-desktop-header-block" cid="237tb7"> <img src="img/account.png" alt="Пользователь" cid="1hicvfo"/> <div class="sh-bc-desktop-account-text" cid="1hicvfp"> Для загрузки рейтина А.: Лаборант (ИТО) </div> </div> <div class="sh-bc-desktop-header-block" cid="1hicvfq">    <div class="btn-link-disabled" cid="237tbl">Сменить рабочее место</div>   <span class="sh-bc-desktop-account-text" style="padding: 0 6px 0 6px;" cid="1hicvfr">|</span>   <a id="logout" class="btn-link" cid="237tbr" href="/app?service=restart">Выйти из системы</a>    </div> </td>  </tr> </table> </div></response><response id="desktopContent" type="element"><div cid="237tce" id="desktopContent"> <span id="mExclusiveModePanel"></span> <span id="mMaintenanceModePanel"></span> <div style="display:none" class="sticky error" cid="237tcg" id="errorContainer"> </div> <div style="display:none" class="sticky info" cid="237tch" id="infoContainer"> </div>   <div class="sticky info" cid="di1ugi"><span mcSpec="content">Системные действия</span></div> <div id="mPageWrapper" cid="di1ugk" class="wrapper">  <div id="unienr14" class="tf-html-panel-container"><table id="unienr14" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unienr14_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unienr14_SysActPanel_SettingsKey_img" name="unienr14_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unienr14_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unienr14_SysActPanel_SettingsKey_collapsed" id="unienr14_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Абитуриенты</div></div></td></tr><tr collapseId="unienr14_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">         <tr cid="di1ugq"> <td cid="di1ugr"> <img id="mTooltip_img" src="img/general/tooltip.png?startupTime=1750084763929" class="tf-input-tooltip-icon" title=""></img><span id="mTooltip_img_info" style="display: none;" class="tf-tooltip tf-tooltip-popup tf-tooltip-info">Предоставляет данные о рейтинге абитуриентов для выбранной приемной кампании в формате xml. Данные подготавливаются службой «Генерация рейтингов абитуриентов и структуры приёма (xml)».</span>&nbsp; <a onclick="buttonClick(event, this); return false;" href="javascript:;" name="_submitButton_exportRatings" id="submitButton_exportRatings" cid="di1ugt" class="btn-link" tabIndex="0" lostFocus="true" mcValidate="false">Получить данные о рейтинге абитуриентов в формате xml</a> </td> </tr>           </table> </td></tr></table></div>  <div id="unischedule" class="tf-html-panel-container"><table id="unischedule" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unischedule_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unischedule_SysActPanel_SettingsKey_img" name="unischedule_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unischedule_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unischedule_SysActPanel_SettingsKey_collapsed" id="unischedule_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Базовое расписание</div></div></td></tr><tr collapseId="unischedule_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">    </table> </td></tr></table></div>  <div id="unisnpps" class="tf-html-panel-container"><table id="unisnpps" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unisnpps_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unisnpps_SysActPanel_SettingsKey_img" name="unisnpps_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unisnpps_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unisnpps_SysActPanel_SettingsKey_collapsed" id="unisnpps_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Внештатные преподаватели</div></div></td></tr><tr collapseId="unisnpps_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">    </table> </td></tr></table></div>  <div id="movestudent" class="tf-html-panel-container"><table id="movestudent" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="movestudent_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="movestudent_SysActPanel_SettingsKey_img" name="movestudent_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('movestudent_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="movestudent_SysActPanel_SettingsKey_collapsed" id="movestudent_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Движение контингента</div></div></td></tr><tr collapseId="movestudent_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">        </table> </td></tr></table></div>  <div id="unidip" class="tf-html-panel-container"><table id="unidip" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unidip_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unidip_SysActPanel_SettingsKey_img" name="unidip_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unidip_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unidip_SysActPanel_SettingsKey_collapsed" id="unidip_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Дипломирование</div></div></td></tr><tr collapseId="unidip_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">          </table> </td></tr></table></div>  <div id="unieductr" class="tf-html-panel-container"><table id="unieductr" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unieductr_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unieductr_SysActPanel_SettingsKey_img" name="unieductr_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unieductr_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unieductr_SysActPanel_SettingsKey_collapsed" id="unieductr_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Договоры на обучение</div></div></td></tr><tr collapseId="unieductr_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">          </table> </td></tr></table></div>  <div id="nsiclient" class="tf-html-panel-container"><table id="nsiclient" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="nsiclient_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="nsiclient_SysActPanel_SettingsKey_img" name="nsiclient_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('nsiclient_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="nsiclient_SysActPanel_SettingsKey_collapsed" id="nsiclient_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Интеграция с НСИ (базовые механизмы для обмена с НСИ)</div></div></td></tr><tr collapseId="nsiclient_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">                </table> </td></tr></table></div>  <div id="unienr14_fis" class="tf-html-panel-container"><table id="unienr14_fis" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unienr14_fis_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unienr14_fis_SysActPanel_SettingsKey_img" name="unienr14_fis_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unienr14_fis_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unienr14_fis_SysActPanel_SettingsKey_collapsed" id="unienr14_fis_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Интеграция с ФИС</div></div></td></tr><tr collapseId="unienr14_fis_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">    </table> </td></tr></table></div>  <div id="uniemp" class="tf-html-panel-container"><table id="uniemp" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="uniemp_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="uniemp_SysActPanel_SettingsKey_img" name="uniemp_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('uniemp_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="uniemp_SysActPanel_SettingsKey_collapsed" id="uniemp_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Кадры</div></div></td></tr><tr collapseId="uniemp_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">                              </table> </td></tr></table></div>  <div id="uni" class="tf-html-panel-container"><table id="uni" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="uni_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="uni_SysActPanel_SettingsKey_img" name="uni_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('uni_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="uni_SysActPanel_SettingsKey_collapsed" id="uni_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Контингент</div></div></td></tr><tr collapseId="uni_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">                            </table> </td></tr></table></div>  <div id="commonbase" class="tf-html-panel-container"><table id="commonbase" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="commonbase_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="commonbase_SysActPanel_SettingsKey_img" name="commonbase_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('commonbase_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="commonbase_SysActPanel_SettingsKey_collapsed" id="commonbase_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Общие прикладные функции</div></div></td></tr><tr collapseId="commonbase_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">                                </table> </td></tr></table></div>  <div id="person" class="tf-html-panel-container"><table id="person" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="person_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="person_SysActPanel_SettingsKey_img" name="person_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('person_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="person_SysActPanel_SettingsKey_collapsed" id="person_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Персоны</div></div></td></tr><tr collapseId="person_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">          </table> </td></tr></table></div>  <div id="unitt" class="tf-html-panel-container"><table id="unitt" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unitt_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unitt_SysActPanel_SettingsKey_img" name="unitt_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unitt_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unitt_SysActPanel_SettingsKey_collapsed" id="unitt_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Расписание</div></div></td></tr><tr collapseId="unitt_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">    </table> </td></tr></table></div>  <div id="unisession" class="tf-html-panel-container"><table id="unisession" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="unisession_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="unisession_SysActPanel_SettingsKey_img" name="unisession_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('unisession_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="unisession_SysActPanel_SettingsKey_collapsed" id="unisession_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Сессия</div></div></td></tr><tr collapseId="unisession_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">        </table> </td></tr></table></div>  <div id="bpms" class="tf-html-panel-container"><table id="bpms" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="bpms_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="bpms_SysActPanel_SettingsKey_img" name="bpms_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('bpms_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="bpms_SysActPanel_SettingsKey_collapsed" id="bpms_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">СЭД</div></div></td></tr><tr collapseId="bpms_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">    </table> </td></tr></table></div>  <div id="uniepp" class="tf-html-panel-container"><table id="uniepp" cid="di1ugm" class="tf-html-panel-simple"><tr><td class="tf-html-panel-title-container"><div class="tf-html-panel-title"><div class="tf-html-panel-title-collapse"><div class="cell-link" id="uniepp_SysActPanel_SettingsKey" link="/app?bc=916de4b72b6a94c2009d3b5a3370e542&amp;component=%24mHtmlPanel&amp;container=org.tandemframework.shared.commonbase.base.bo.SystemAction.ui.Pub.Template&amp;json=true&amp;path=defaultRegion&amp;service=bces&amp;site=510973124215"><img src="img/general/uncollapsed.png?startupTime=1750084763929" title="Свернуть" id="uniepp_SysActPanel_SettingsKey_img" name="uniepp_SysActPanel_SettingsKey_img" style="cursor:pointer;" onclick="onClickCollapse('uniepp_SysActPanel_SettingsKey', this);"></img><input type="hidden" name="uniepp_SysActPanel_SettingsKey_collapsed" id="uniepp_SysActPanel_SettingsKey_collapsed" value="0" /></div></div><div class="tf-html-panel-title-text" style="text-align:left;">Учебный процесс</div></div></td></tr><tr collapseId="uniepp_SysActPanel_SettingsKey_tr"><td class="tf-html-panel-content-simple"> <table cid="di1ugn">                                    </table> </td></tr></table></div>  </div>   <div cid="4d6bbso" id="dlgWrp_bcDialog"> <div id="bcDialog" class="modal" tabindex="-1" role="dialog" aria-labelledby="bcDialog_title" aria-hidden="true"></div> </div> <div style="display:none" cid="237tcj" id="errorContainerLast"></div> <div style="display:none" cid="237tck" id="infoContainerLast"></div> </div></response><response id="formhidden" type="element"><div style="display:none;" id="formhidden"><input type="hidden" name="formids" value="" />
+<input type="hidden" name="seedids" value="BrO0ABXdWAFQsc2VydmljZSQwLHBhZ2UkMCxjb21wb25lbnQkMCxjb250YWluZXIkMCxzZXNzaW9uJDAsc3AkMCxtU2hlbGwkMCxJZiQwLEJvZHkkMCxmb3JtJDA=" />
+<input type="hidden" name="bc" value="916de4b72b6a94c2009d3b5a3370e542" />
+<input type="hidden" name="component" value="form" />
+<input type="hidden" name="container" value="org.tandemframework.shared.person.base.bo.PersonShell.ui.Desktop.Template" />
+<input type="hidden" name="path" value="" />
+<input type="hidden" name="service" value="bces" />
+<input type="hidden" name="site" value="510973124215" />
+<input type="hidden" name="reservedids" value="bc,path,site" />
+<input type="hidden" name="submitmode" value="" />
+<input type="hidden" name="submitname" value="" />
+<input type="hidden" name="sp" value="" />
+<input type="hidden" name="submitMethod" value="post" />
+<input type="hidden" name="renderId" value="4" />
+<input type="hidden" name="if__mIf" value="1" />
+<input type="hidden" name="if__mIf_0" value="0" />
+<input type="hidden" name="if__mIf_1" value="0" />
+<input type="hidden" name="if__mIf_2" value="1" />
+<input type="hidden" name="if__mIf_3" value="1" />
+<input type="hidden" name="if__mIf_4" value="1" />
+<input type="hidden" name="If_1" value="F" />
+<input type="hidden" name="if__mIf_5" value="1" />
+<input type="hidden" name="if__mIf_6" value="1" />
+<input type="hidden" name="if__mIf_7" value="0" />
+<input type="hidden" name="if__mIf_8" value="0" />
+<input type="hidden" name="if__mIf_9" value="0" />
+<input type="hidden" name="if__mIf_10" value="1" />
+<input type="hidden" name="if__mIf_11" value="0" />
+<input type="hidden" name="if__mIf_12" value="0" />
+<input type="hidden" name="if__mIf_13" value="0" />
+<input type="hidden" name="if__mIf_14" value="0" />
+<input type="hidden" name="if__mIf_15" value="0" />
+<input type="hidden" name="if__mIf_16" value="0" />
+<input type="hidden" name="if__mIf_17" value="0" />
+<input type="hidden" name="if__mIf_18" value="0" />
+<input type="hidden" name="if__mIf_19" value="0" />
+<input type="hidden" name="if__mIf_20" value="0" />
+<input type="hidden" name="if__mIf_21" value="0" />
+<input type="hidden" name="if__mIf_22" value="0" />
+<input type="hidden" name="if__mIf_23" value="0" />
+<input type="hidden" name="if__mIf_24" value="0" />
+<input type="hidden" name="if__mIf_25" value="0" />
+<input type="hidden" name="if__mIf_26" value="0" />
+<input type="hidden" name="if__mIf_27" value="0" />
+<input type="hidden" name="if__mIf_28" value="0" />
+<input type="hidden" name="if__mIf_29" value="0" />
+<input type="hidden" name="if__mIf_30" value="0" />
+<input type="hidden" name="if__mIf_31" value="0" />
+<input type="hidden" name="if__mIf_32" value="0" />
+<input type="hidden" name="if__mIf_33" value="0" />
+<input type="hidden" name="if__mIf_34" value="0" />
+<input type="hidden" name="if__mIf_35" value="0" />
+<input type="hidden" name="if__mIf_36" value="0" />
+<input type="hidden" name="if__mIf_37" value="0" />
+<input type="hidden" name="if__mIf_38" value="0" />
+<input type="hidden" name="if__mIf_39" value="0" />
+<input type="hidden" name="if__mIf_40" value="0" />
+<input type="hidden" name="if__mIf_41" value="0" />
+<input type="hidden" name="if__mIf_42" value="0" />
+<input type="hidden" name="if__mIf_43" value="0" />
+<input type="hidden" name="if__mIf_44" value="0" />
+<input type="hidden" name="if__mIf_45" value="0" />
+<input type="hidden" name="if__mIf_46" value="0" />
+<input type="hidden" name="if__mIf_47" value="0" />
+<input type="hidden" name="if__mIf_48" value="0" />
+<input type="hidden" name="if__mIf_49" value="0" />
+<input type="hidden" name="if__mIf_50" value="0" />
+<input type="hidden" name="if__mIf_51" value="0" />
+<input type="hidden" name="if__mIf_52" value="0" />
+<input type="hidden" name="if__mIf_53" value="0" />
+<input type="hidden" name="if__mIf_54" value="0" />
+<input type="hidden" name="if__mIf_55" value="0" />
+<input type="hidden" name="if__mIf_56" value="0" />
+<input type="hidden" name="if__mIf_57" value="0" />
+<input type="hidden" name="if__mIf_58" value="0" />
+<input type="hidden" name="if__mIf_59" value="0" />
+<input type="hidden" name="if__mIf_60" value="0" />
+<input type="hidden" name="if__mIf_61" value="0" />
+<input type="hidden" name="if__mIf_62" value="0" />
+<input type="hidden" name="if__mIf_63" value="0" />
+<input type="hidden" name="if__mIf_64" value="0" />
+<input type="hidden" name="if__mIf_65" value="0" />
+<input type="hidden" name="if__mIf_66" value="0" />
+<input type="hidden" name="if__mIf_67" value="0" />
+<input type="hidden" name="if__mIf_68" value="0" />
+<input type="hidden" name="if__mIf_69" value="0" />
+<input type="hidden" name="if__mIf_70" value="0" />
+<input type="hidden" name="if__mIf_71" value="0" />
+<input type="hidden" name="if__mIf_72" value="0" />
+<input type="hidden" name="if__mIf_73" value="0" />
+<input type="hidden" name="if__mIf_74" value="0" />
+<input type="hidden" name="if__mIf_75" value="0" />
+<input type="hidden" name="if__mIf_76" value="0" />
+<input type="hidden" name="if__mIf_77" value="0" />
+<input type="hidden" name="if__mIf_78" value="0" />
+<input type="hidden" name="if__mIf_79" value="0" />
+<input type="hidden" name="if__mIf_80" value="0" />
+<input type="hidden" name="if__mIf_81" value="0" />
+<input type="hidden" name="if__mIf_82" value="0" />
+<input type="hidden" name="if__mIf_83" value="0" />
+<input type="hidden" name="if__mIf_84" value="0" />
+<input type="hidden" name="if__mIf_85" value="0" />
+<input type="hidden" name="if__mIf_86" value="0" />
+<input type="hidden" name="if__mIf_87" value="0" />
+<input type="hidden" name="if__mIf_88" value="0" />
+<input type="hidden" name="if__mIf_89" value="0" />
+<input type="hidden" name="if__mIf_90" value="0" />
+<input type="hidden" name="if__mIf_91" value="0" />
+<input type="hidden" name="if__mIf_92" value="0" />
+<input type="hidden" name="if__mIf_93" value="0" />
+<input type="hidden" name="if__mIf_94" value="0" />
+<input type="hidden" name="if__mIf_95" value="0" />
+<input type="hidden" name="if__mIf_96" value="0" />
+<input type="hidden" name="if__mIf_97" value="0" />
+<input type="hidden" name="if__mIf_98" value="0" />
+<input type="hidden" name="if__mIf_99" value="0" />
+<input type="hidden" name="if__mIf_100" value="0" />
+<input type="hidden" name="if__mIf_101" value="0" />
+<input type="hidden" name="if__mIf_102" value="0" />
+<input type="hidden" name="if__mIf_103" value="0" />
+</div></response><response id="bodyscript" type="script"><script>
+//<![CDATA[
+SITE_ID = "510973124215";REFRESH_DELAY = 60000;UNIQUE_REQUEST_NUMBER = 1750410939711;REQUEST_COMPLETED = false;STATEFULL_URL = true;startRefreshMonitor();
+//]]>
+</script></response></ajax-response>
