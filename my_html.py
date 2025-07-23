@@ -1,14 +1,6 @@
-
 import jinja2
 import xml.etree.ElementTree as ET 
 from datetime import datetime
-
-
-
-
-
-
-
 def parser(tag,file_name,programSet,plan,compensationTypeShortTitle):
 
     with open(file_name+".html", mode="w", encoding='utf-8-sig') as file_writer:
@@ -35,14 +27,17 @@ def parser(tag,file_name,programSet,plan,compensationTypeShortTitle):
             averageEduInstitutionMark= tagen.attrib['averageEduInstitutionMark']# Балл аттестата            
             originalSubmissionWay=tagen.attrib['originalIn']# Сдан ли оргинал
             priority=tagen.attrib['priority']
+            acceptedEntrantDate=tagen.attrib.get('acceptedEntrantDate')
             averageEduInstitutionMark=averageEduInstitutionMark.replace(',', '.')    
             if originalSubmissionWay=='false':
                 originalSubmissionWay='НЕТ'
             else:
-                if priority=='1':
-                    originalSubmissionWay='ДА'
-                else:
-                    originalSubmissionWay='ДА'
+                originalSubmissionWay='ДА'
+                if compensationTypeShortTitle=="по договору":
+                    if acceptedEntrantDate is None:
+                        originalSubmissionWay='НЕТ'
+
+                
 
 
             
