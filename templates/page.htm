@@ -57,59 +57,60 @@
 
 <script>
   $(document).ready(function() {
-    $('#userTable').DataTable();
-
-  });
-  var table = new DataTable('#userTable', {
-
-    scrollX: false,
-    scrollY: false,
-    language: {
-        url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
-    },
-    "aLengthMenu": [[ 25, 50, 100], [25, 50, 100]],
-    "iDisplayLength": 25,
-
-
-    columnDefs: [
-        {
-            searchable: false,
-            orderable: false,
-            targets: 0
-        }
-    ],
-    order: [[1, 'asc']]
-    
-});
+    var table = $('#userTable').DataTable({
+      scrollX: false,
+      scrollY: false,
+      language: {
+          url: 'https://cdn.datatables.net/plug-ins/2.1.8/i18n/ru.json',
+      },
+      "aLengthMenu": [[ 25, 50, 100], [25, 50, 100]],
+      "iDisplayLength": 25,
+      columnDefs: [
+          {
+              searchable: false,
+              orderable: false,
+              targets: 0
+          }
+      ],
+      order: [[1, 'asc']]
+    });
  
-table
-    .on('order.dt search.dt', function () {
+    table.on('order.dt search.dt', function () {
         let i = 1;
- 
-        table
-            .cells(null, 0, { search: 'applied', order: 'applied' })
+        table.cells(null, 0, { search: 'applied', order: 'applied' })
             .every(function (cell) {
                 this.data(i++);
             });
-    })
-    .draw();
-var table = $('#userTable').DataTable();
-    $("#hide").click(function() {
-    $(this).attr('disabled', true); // Либо добавить атрибут disabled 
+    }).draw();
+    
+    // Выполняем фильтрацию сразу при загрузке
+    $("#hide").attr('disabled', true);
     $("#reset").attr('disabled', false);
     $.fn.dataTable.ext.search.push(
       function(settings, data, dataIndex) {
           return $(table.row(dataIndex).node()).attr('data-orig') == 'ДА';
-        }
+      }
     );
     table.draw();
-});    
-$("#reset").click(function() {
-    $(this).attr('disabled', true); // Либо добавить атрибут disabled 
-    $("#hide").attr('disabled', false);
-    $.fn.dataTable.ext.search.pop();
-    table.draw();
-});
+    
+    // Обработчики кнопок
+    $("#hide").click(function() {
+      $(this).attr('disabled', true);
+      $("#reset").attr('disabled', false);
+      $.fn.dataTable.ext.search.push(
+        function(settings, data, dataIndex) {
+            return $(table.row(dataIndex).node()).attr('data-orig') == 'ДА';
+        }
+      );
+      table.draw();
+    });    
+    $("#reset").click(function() {
+      $(this).attr('disabled', true);
+      $("#hide").attr('disabled', false);
+      $.fn.dataTable.ext.search.pop();
+      table.draw();
+    });
+  });
 </script>
 </body>
 </html>
